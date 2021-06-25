@@ -1,1 +1,2 @@
-# AdminPanelSafari
+# safari-booking-operators
+safari-booking-operators
