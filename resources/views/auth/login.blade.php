@@ -53,7 +53,6 @@
                     </div>
                 </div>
             </div>
-            </form>
             <div class="container" >
                 <div class="row">
                     <div class="col-lg-5">
@@ -68,6 +67,7 @@
                     </div>
                 </div>
             </div>
+            </form>
         </div>
     </section>
 
