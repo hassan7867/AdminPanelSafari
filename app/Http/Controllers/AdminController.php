@@ -15,10 +15,10 @@ class AdminController extends Controller
             $dbUser = AdminTable::where('email', $request->email)->first();
             if ($dbUser->password == ($request->password)) {
                 Session::put('adminId', $dbUser->id);
-                return json_encode(['status' => true, 'message' => 'Login Successfull!']);
+                return redirect('dashboard');
             }
         } else {
-            return json_encode(['status' => false, 'message' => 'Invalid username or password!']);
+            return redirect()->back()->withErrors(['Invalid Email or Password']);
         }
     }
     public function signout()

@@ -11,6 +11,10 @@
 
         <div>
             {{csrf_field()}}
+            <form method="POST" action="{{url('admin-signin')}}">
+                @csrf
+
+
             <div class="container">
                 <div class="row">
 
@@ -36,10 +40,10 @@
                         </div>
                         <div class="login-form">
                             <div class="input-box mt-30">
-                                <input type="text" id="email" name="login" placeholder="Email">
+                                <input type="text" id="email" name="email" placeholder="Email" required>
                             </div>
                             <div class="input-box mt-30">
-                                <input type="password" id="password" name="login" placeholder="Password">
+                                <input type="password" id="password" name="password" placeholder="Password" required>
 
                             </div>
                             <div class="text-danger mt-2" style="display: none; color: red!important;"
@@ -49,6 +53,7 @@
                     </div>
                 </div>
             </div>
+            </form>
             <div class="container" >
                 <div class="row">
                     <div class="col-lg-5">
@@ -56,7 +61,7 @@
                     </div>
                     <div class="col-lg-3 mt-30">
                         <button type="submit"
-                                onclick="adminLogin()"
+
                                 style="background: #6b9ce8;letter-spacing: 3px;border: none;color: #fff;cursor: pointer;padding: 1.0rem 3rem;text-transform: uppercase;width: 100%;border-radius: 5px;line-height: 18px;font-size: 15px !important;">
                             Login
                         </button>
