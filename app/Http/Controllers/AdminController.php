@@ -16,6 +16,8 @@ class AdminController extends Controller
             if ($dbUser->password == ($request->password)) {
                 Session::put('adminId', $dbUser->id);
                 return redirect('dashboard');
+            }else {
+                return redirect()->back()->withErrors(['Invalid Email or Password']);
             }
         } else {
             return redirect()->back()->withErrors(['Invalid Email or Password']);
