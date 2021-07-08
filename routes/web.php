@@ -79,5 +79,5 @@ Route::get('customer-payment/{token}', "DashboardController@customerPayment");
 Route::post('customer-post-payment', "DashboardController@customerPostPayment");
 Route::post('/admin-signin', 'AdminController@login');
 Route::post('/admin-logout', 'AdminController@signout');
-Route::post('/approve-review/{id}', 'AdminController@approveReview');
-Route::post('/reject-review/{id}', 'AdminController@rejectReview');
+Route::get('/approve-review/{id}', 'AdminController@approveReview');
+Route::get('/reject-review/{id}', 'AdminController@rejectReview');
