@@ -29,29 +29,31 @@ class AdminController extends Controller
         return json_encode(true);
     }
 
-    public function approveReview(Request $request)
+    public function approveReview($id)
     {
         try{
-            $reviewId= ReviewsTable::where('id',$request->id)->first();
+            $reviewId= ReviewsTable::where('id',$id)->first();
             $reviewId->status="approved";
             $reviewId->update();
-            return json_encode(true);
+            session()->flash('msg', 'Approved');
+            return redirect()->back();
         }
         catch (\Exception $exception){
-            return json_encode(['status'=>false,'message'=>$exception->getMessage()]);
+            return redirect()->back()->withErrors([$exception->getMessage()]);
         }
 
     }
 
-    public function rejectReview(Request $request)
+    public function rejectReview($id)
     {
         try {
-            $reviewId = ReviewsTable::where('id', $request->id)->first();
+            $reviewId = ReviewsTable::where('id', $id)->first();
             $reviewId->status = "rejected";
             $reviewId->update();
-            return json_encode(true);
+            session()->flash('msg', 'Rejected');
+            return redirect()->back();
         } catch (\Exception $exception) {
-            return json_encode(['status' => false, 'message' => $exception->getMessage()]);
+            return redirect()->back()->withErrors([$exception->getMessage()]);
         }
 
     }

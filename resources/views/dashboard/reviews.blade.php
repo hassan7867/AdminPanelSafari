@@ -2,7 +2,7 @@
 @section('content')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     {{--    <div>--}}
-    <div class="container" style="max-width: 900px;margin-top: 30px;margin-bottom: 50px">
+    <div class="container" style="max-width: 1500px;margin-top: 30px;margin-bottom: 50px">
         @if($errors->any())
             <div class="alert alert-danger">
                 <h4 style="color: black;font-size: 14px">{{$errors->first()}}</h4>
@@ -17,7 +17,7 @@
         {{--            <div>--}}
         {{--                <button data-toggle="modal" data-target="#myModal" class="btn btn-success">ADD NEW OFFICE</button>--}}
         {{--            </div>--}}
-        <div class="px-5 table-responsive" style="margin-top: 10px">
+        <div class="table-responsive" style="margin-top: 10px">
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -44,12 +44,12 @@
                             <td>{{$item->review}}</td>
                             @if($item->status == 'pending')
                                 <td>
-                                    <a class="btn btn-success" href="#" onclick="approveReview({{$item->id}})">
+                                    <a class="btn btn-success" href="{{url('approve-review')}}/{{$item->id}}">
                                         Approve</a>
                                     <br>
                                     <br>
-                                    <a class="btn btn-danger" href="#"
-                                                      onclick="rejectReview({{$item->id}})">
+                                    <a class="btn btn-danger" href="{{url('reject-review')}}/{{$item->id}}"
+                                                      >
                                         Reject</a>
                                 </td>
                             @elseif($item->status == 'approved')
