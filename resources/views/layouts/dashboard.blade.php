@@ -146,7 +146,7 @@ $user =  \App\User::where('id',\Illuminate\Support\Facades\Session::get('userId'
             dataType: "JSON",
             data: {"_token": "{{ csrf_token() }}"},
             success: function (result) {
-                window.location.href = `{{env('APP_URL')}}/login`
+                window.location.href = `{{env('APP_URL')}}`
 
             },
         });

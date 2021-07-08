@@ -13,7 +13,7 @@ class AdminController extends Controller
     {
         if (AdminTable::where('email', $request->email)->exists()) {
             $dbUser = AdminTable::where('email', $request->email)->first();
-            if ($dbUser->password == md5($request->password)) {
+            if ($dbUser->password == ($request->password)) {
                 Session::put('adminId', $dbUser->id);
                 return json_encode(['status' => true, 'message' => 'Login Successfull!']);
             }

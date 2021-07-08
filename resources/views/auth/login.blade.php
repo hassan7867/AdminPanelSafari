@@ -13,11 +13,9 @@
             {{csrf_field()}}
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4">
 
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="login-title">
+                    <div class="col-lg-12" style="margin: 0 auto;max-width: 500px">
+                        <div class="login-title" >
                             <h2 style="text-align: center;color: black">ADMIN LOGIN</h2>
                             <div style="margin: 0 auto;max-width: 100px">
                                 <div style="border-bottom: 3px solid black;width: 100px" >
