@@ -9,7 +9,10 @@ use App\CertificateFiles;
 use App\Certificates;
 use App\CompanyDestinations;
 use App\CompanyOffice;
+use App\Countries;
 use App\Exclusions;
+use App\Footer;
+use App\HomePage;
 use App\Inclusions;
 use App\Rates;
 use App\ReviewsTable;
@@ -26,6 +29,7 @@ use Firebase\JWT\JWT;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Lcobucci\JWT\Exception;
 use services\email_messages\BidMessage;
 use services\email_messages\ForgotPasswordMessage;
 use services\email_messages\ResetPassword;
@@ -41,8 +45,114 @@ use services\email_services\SendEmailService;
 
 class DashboardController extends Controller
 {
+    public function homepage(){
+        $homePage = HomePage::all()[0];
+        return view('dashboard.homepage')->with(['data' => $homePage]);
+    }
+
+    public function footer(){
+        $footer = Footer::all()[0];
+        return view('dashboard.footer')->with(['data' => $footer]);
+    }
+
+    public function deleteCountry($id){
+        Countries::where('id', $id)->first()->delete();
+        session()->flash('msg', 'Deleted Successfully!');
+        return redirect()->back();
+    }
+
+    public function countriespage(){
+        $countries = Countries::all();
+        return view('dashboard.countriespage')->with(['countries' => $countries]);
+
+    }
+
+    public function viewMainFile(){
+        $file = HomePage::where('id', 1)->first();
+        $file = base_path('/data') . '/files' . '/' . $file->banner;
+        $type = mime_content_type($file);
+        header('Content-Type:' . $type);
+        header('Content-Length: ' . filesize($file));
+        return readfile($file);
+    }
+
+    public function viewCountryImage($id){
+        $file = Countries::where('id', $id)->first();
+        $file = base_path('/data') . '/files' . '/' . $file->image;
+        $type = mime_content_type($file);
+        header('Content-Type:' . $type);
+        header('Content-Length: ' . filesize($file));
+        return readfile($file);
+    }
+
+    public function homePageData(){
+        return HomePage::where('id', 1)->first();
+    }
+
+    public function updatehome(Request $request){
+        try {
+            $homePage = HomePage::all()[0];
+            $homePage->main_text = $request->main_text;
+            if ($request->hasfile('banner')) {
+                $files = $request->file('banner');
+                foreach ($files as $file) {
+                    $name = rand(0, 1000) . time() . '.' . $file->getClientOriginalExtension();
+                    $file->move(base_path('/data') . '/files' . '/', $name);
+                    $homePage->banner = $name;
+                }
+            }
+            $homePage->update();
+            session()->flash('msg', 'Saved Successfully!');
+            return redirect()->back();
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors([$exception->getMessage()]);
+        }
+    }
+
+    public function addcountry(Request $request){
+        try {
+            $country = new Countries();
+            $country->name = $request->name;
+            $country->rates = $request->rates;
+            $country->best_time = $request->best_time;
+            $country->high_seasons = $request->high_seasons;
+            $country->description = $request->description;
+            if ($request->hasfile('image')) {
+                $files = $request->file('image');
+                foreach ($files as $file) {
+                    $name = rand(0, 1000) . time() . '.' . $file->getClientOriginalExtension();
+                    $file->move(base_path('/data') . '/files' . '/', $name);
+                    $country->image = $name;
+                }
+            }
+            $country->save();
+            session()->flash('msg', 'Saved Successfully!');
+            return redirect()->back();
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors([$exception->getMessage()]);
+        }
+
+
+    }
+
+    public function updatefooter(Request $request){
+        try {
+            $homePage = Footer::all()[0];
+            $homePage->text = $request->text;
+            $homePage->fb_link = $request->fb_link;
+            $homePage->twitter_link = $request->twitter_link;
+            $homePage->instagram_link = $request->instagram_link;
+            $homePage->update();
+            session()->flash('msg', 'Saved Successfully!');
+            return redirect()->back();
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors([$exception->getMessage()]);
+        }
+    }
+
     public function showTourIconOnLandingPage($tourId)
     {
+
         $file = Tours::where('id', $tourId)->first();
         $file = base_path('/data') . '/user-files' . '/' . $file->picture;
         $type = mime_content_type($file);

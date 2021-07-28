@@ -200,10 +200,10 @@
     <div class="header-nav" style="top: 0px">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5">
+{{--                <div class="col-lg-5">--}}
 
-                </div>
-                <div class="col-lg-6 ml-5">
+{{--                </div>--}}
+                <div class="col-lg-12">
                     <div class="navigation">
                         <nav class="navbar navbar-expand-lg navbar-light " style="margin-top: 30px;margin-bottom: 30px">
                             <a class="navbar-brand" href="{{url('')}}" style="color: black;font-size: 30px">{{env('APP_NAME')}}</a>

@@ -35,10 +35,22 @@ Route::get('logout-user', function (){
     \Illuminate\Support\Facades\Auth::logout();
     return redirect('/');
 })->name('logout-user');
+Route::get('view-main-file', "DashboardController@viewMainFile");
+Route::get('view-country-image/{id}', "DashboardController@viewCountryImage");
+Route::get('home-page-data', "DashboardController@homePageData");
+Route::get('home-page-data', "DashboardController@homePageData");
 
 
 
 //dashboard routes
+Route::get('home-page', "DashboardController@homepage")->middleware('dashboard');
+Route::get('footer', "DashboardController@footer")->middleware('dashboard');
+Route::get('countries-page', "DashboardController@countriespage")->middleware('dashboard');
+Route::get('delete-country/{id}', "DashboardController@deleteCountry")->middleware('dashboard');
+Route::post('update-home', "DashboardController@updatehome")->middleware('dashboard');
+Route::post('update-footer', "DashboardController@updatefooter")->middleware('dashboard');
+Route::post('add-country', "DashboardController@addcountry")->middleware('dashboard');
+
 Route::get('dashboard', "DashboardController@dashboard")->middleware('dashboard');
 Route::get('manage-offices', "DashboardController@manageOffices")->middleware('dashboard');
 Route::get('manage-destinations', "DashboardController@manageDestinations")->middleware('dashboard');

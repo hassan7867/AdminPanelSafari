@@ -85,7 +85,7 @@ $user =  \App\User::where('id',\Illuminate\Support\Facades\Session::get('userId'
         <nav id="sidebar" class="sidebar-wrapper">
             <div class="sidebar-content">
                 <div class="sidebar-brand">
-                    <a class="navbar-brand" href="{{ url('/home') }}">Admin Dashboard</a>
+                    <a class="navbar-brand" href="{{ url('/dashboard') }}">Admin Dashboard</a>
                     <div id="close-sidebar">
                         <i class="fas fa-times"></i>
                     </div>
@@ -112,8 +112,22 @@ $user =  \App\User::where('id',\Illuminate\Support\Facades\Session::get('userId'
                         </li>
                         <li  class="{{\Request::is('reviews') ? 'bgactivelink' : ''}}" style="border: 1px solid white;border-bottom: 0px">
                             <a class="{{\Request::is('reviews') ? 'coloractivelink' : ''}}" href="{{url('reviews')}}">
-{{--                                <i class="fas fa-users"></i>--}}
                                 <span>REVIEWS</span>
+                            </a>
+                        </li>
+                        <li  class="{{\Request::is('home-page') ? 'bgactivelink' : ''}}" style="border: 1px solid white;border-bottom: 0px">
+                            <a class="{{\Request::is('home-page') ? 'coloractivelink' : ''}}" href="{{url('home-page')}}">
+                                <span>HOME PAGE</span>
+                            </a>
+                        </li>
+                        <li  class="{{\Request::is('footer') ? 'bgactivelink' : ''}}" style="border: 1px solid white;border-bottom: 0px">
+                            <a class="{{\Request::is('footer') ? 'coloractivelink' : ''}}" href="{{url('footer')}}">
+                                <span>FOOTER</span>
+                            </a>
+                        </li>
+                        <li  class="{{\Request::is('countries-page') ? 'bgactivelink' : ''}}" style="border: 1px solid white;border-bottom: 0px">
+                            <a class="{{\Request::is('countries-page') ? 'coloractivelink' : ''}}" href="{{url('countries-page')}}">
+                                <span>COUNTRIES</span>
                             </a>
                         </li>
                         <li class="" style="border: 1px solid white;">
